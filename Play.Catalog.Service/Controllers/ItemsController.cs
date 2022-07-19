@@ -24,9 +24,10 @@ namespace Play.Catalog.Service.Controllers
         }
 
         [HttpGet("{id}")]
-        public ItemDto GetById(Guid id){
+        public ItemDto GetById(Guid id)
+        {
             var item = items.Where(item => item.Id == id).SingleOrDefault();
-            return item;            
+            return item;
         }
 
         [HttpPost]
@@ -36,7 +37,7 @@ namespace Play.Catalog.Service.Controllers
                 DateTimeOffset.UtcNow);
             items.Add(item);
 
-            return CreatedAtAction(nameof(GetById), new {id = item.Id}, item);
+            return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]
@@ -55,6 +56,14 @@ namespace Play.Catalog.Service.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var index = items.FindIndex(existingItem => existingItem.Id == id);
+            items.RemoveAt(index);
+
+            return NoContent();
+        }
 
 
     }

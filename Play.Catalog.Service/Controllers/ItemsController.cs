@@ -48,6 +48,11 @@ namespace Play.Catalog.Service.Controllers
         public IActionResult Put(Guid id, UpdateItemDto updateItemDto)
         {
             var exisingItem = items.Where(item => item.Id == id).SingleOrDefault();
+
+            if (exisingItem == null)
+            {
+                return NotFound();}
+            
             var updatedItem = exisingItem with
             {
                 Name = updateItemDto.Name,
@@ -64,6 +69,11 @@ namespace Play.Catalog.Service.Controllers
         public IActionResult Delete(Guid id)
         {
             var index = items.FindIndex(existingItem => existingItem.Id == id);
+
+            if (index < 0)
+            {
+                return NotFound();
+            }
             items.RemoveAt(index);
 
             return NoContent();

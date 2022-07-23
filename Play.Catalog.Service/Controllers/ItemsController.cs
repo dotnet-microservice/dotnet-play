@@ -65,6 +65,7 @@ namespace Play.Catalog.Service.Controllers
             return NoContent();
         }
 
+        // Delete /items/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
@@ -79,6 +80,9 @@ namespace Play.Catalog.Service.Controllers
             return NoContent();
         }
 
+        
+        
+        
 
     }
 }
